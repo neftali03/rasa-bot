@@ -4,37 +4,111 @@ nlu:
 - intent: normal_greeting
   examples: |
     - ¡Hola!
-    - Hola!
-    - Buenas
-    - buenas
     - Hola
+    - Buenas
     - Buenos días
-    - Buenos dias
-    - buenos dias
     - Buenas tardes
-    - buenas tardes
     - Buenas noches
-    - buenas noches
     - hola amigo
     - hola amiga
     - hola chat
+    - hola vocacional
+    - hola orientación
 
 - intent: informal_greetings
   examples: |
     - hey
-    - Hey
-    - qué tal
-    - que tal
     - que ondas
-    - que pasa
-    - qué pasa 
+    - qué pasa
 
-- intent: normal_farewells
+- intent: positive_answer_with_question
   examples: |
-    - adios
-    - ¡adios!
-    - adiós
-    - ¡adiós!
+    - bien y tu
+    - me siento bien y tu
+    - estoy excelente y tu
+    - estoy super bien y tu
+
+- intent: negative_answer_with_question
+  examples: |
+    - mal y tu
+    - me siento mal y tu
+    - estoy muy mal y tu
+    - estoy super mal y tu
+    
+- intent: positive_answer_without_question
+  examples: |
+    - bien
+    - me siento bien
+    - estoy excelente
+    - estoy super bien
+
+- intent: negative_answer_without_question
+  examples: |
+    - mal
+    - me siento mal
+    - estoy muy mal
+    - estoy super mal
+
+- intent: bot_questions
+  examples: |
+    - eres humano
+    - tienes vida
+    - eres mujer
+    - eres hombre
+    - eres un bot
+    - eres un robot
+    - eres una inteligencia artificial
+    - tienes emociones
+    - tienes sentimientos
+    - puedes sentir
+    - eres real
+    - eres de verdad
+    - quién te creó
+    - eres programado
+    - eres artificial
+
+- intent: age
+  examples: |
+    - que edad tienes
+    - cual es tu edad
+    - edad
+    - cuántos años tienes
+    - cuántos años
+    - qué edad
+    - qué edad tienes
+
+- intent: feelings
+  examples: |
+    - tienes sentimientos
+    - me quieres
+    - me amas
+    - me extrañas
+    - tienes conciencia
+    - tienes emociones
+    - te importo
+    - puedes amar
+    - puedes sentir
+    - sientes algo
+    - te preocupas por mí
+    - eres capaz de sentir
+    - tienes amor
+    - te gustaría tener sentimientos
+    - te gusta alguien
+
+- intent: inquiry
+  examples: |
+    - te puedo preguntar algo
+    - quiero saber algo
+    - tendo una duda
+    - quiero preguntarte algo
+    - necesito hacerte una pregunta
+    - tengo una pregunta
+    - puedo preguntarte algo
+    - me gustaría saber algo
+    - quisiera preguntarte algo
+    - ¿puedo preguntarte algo?
+    - ¿tienes un momento para una pregunta?
+    - ¿puedo hacerte una consulta?
 
 - intent: affirmation
   examples: |
@@ -48,30 +122,9 @@ nlu:
     - no
     - n
 
-- intent: bot_questions
+- intent: normal_farewells
   examples: |
-    - eres humano
-    - tienes vida
-    - eres mujer
-    - eres hombre
-
-- intent: age
-  examples: |
-    - que edad tienes
-    - cual es tu edad
-    - edad
-
-- intent: feelings
-  examples: |
-    - tienes sentimientos
-    - me quieres
-    - me amas
-    - me extrañas
-    - tienes conciencia
-
-- intent: inquiry
-  examples: |
-    - te puedo preguntar algo
-    - quiero saber algo
-    - tendo una duda
-    - quiero preguntarte algo
+    - adiós
+    - nos vemos
+    - hasta pronto
+    - me tengo que ir
