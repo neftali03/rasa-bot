@@ -1,91 +1,77 @@
 version: "3.1"
 
 nlu:
-- intent: greet
+- intent: normal_greeting
+  examples: |
+    - ¡Hola!
+    - Hola!
+    - Buenas
+    - buenas
+    - Hola
+    - Buenos días
+    - Buenos dias
+    - buenos dias
+    - Buenas tardes
+    - buenas tardes
+    - Buenas noches
+    - buenas noches
+    - hola amigo
+    - hola amiga
+    - hola chat
+
+- intent: informal_greetings
   examples: |
     - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - Hey
+    - qué tal
+    - que tal
+    - que ondas
+    - que pasa
+    - qué pasa 
 
-- intent: goodbye
+- intent: normal_farewells
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - adios
+    - ¡adios!
+    - adiós
+    - ¡adiós!
 
-- intent: affirm
+- intent: affirmation
   examples: |
     - yes
     - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - si
+    - s
 
-- intent: deny
+- intent: negation
   examples: |
     - no
     - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
 
-- intent: mood_great
+- intent: bot_questions
   examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+    - eres humano
+    - tienes vida
+    - eres mujer
+    - eres hombre
 
-- intent: mood_unhappy
+- intent: age
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - que edad tienes
+    - cual es tu edad
+    - edad
 
-- intent: bot_challenge
+- intent: feelings
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - tienes sentimientos
+    - me quieres
+    - me amas
+    - me extrañas
+    - tienes conciencia
+
+- intent: inquiry
+  examples: |
+    - te puedo preguntar algo
+    - quiero saber algo
+    - tendo una duda
+    - quiero preguntarte algo
