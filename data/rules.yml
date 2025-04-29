@@ -4,10 +4,10 @@ rules:
 
 - rule: Say goodbye anytime the user says goodbye
   steps:
-  - intent: goodbye
+  - intent: normal_farewells
   - action: utter_goodbye
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: bot_questions
+  - action: utter_bot_questions
