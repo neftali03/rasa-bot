@@ -1,7 +1,7 @@
 version: "3.1"
 
 nlu:
-- intent: normal_greeting
+- intent: greetings
   examples: |
     - ¡Hola!
     - Hola
@@ -14,102 +14,35 @@ nlu:
     - hola chat
     - hola vocacional
     - hola orientación
-
-- intent: informal_greetings
-  examples: |
     - hey
-    - que ondas
-    - qué pasa
+    - que pasa
+    - what's up
 
-- intent: positive_answer_with_question
-  examples: |
-    - bien y tu
-    - me siento bien y tu
-    - estoy excelente y tu
-    - estoy super bien y tu
-
-- intent: negative_answer_with_question
-  examples: |
-    - mal y tu
-    - me siento mal y tu
-    - estoy muy mal y tu
-    - estoy super mal y tu
-    
-- intent: positive_answer_without_question
+- intent: user_emotion_positive
   examples: |
     - bien
     - me siento bien
     - estoy excelente
     - estoy super bien
 
-- intent: negative_answer_without_question
+- intent: user_emotion_negative
   examples: |
     - mal
     - me siento mal
     - estoy muy mal
     - estoy super mal
 
-- intent: bot_questions
+- intent: farewells
   examples: |
-    - eres humano
-    - tienes vida
-    - eres mujer
-    - eres hombre
-    - eres un bot
-    - eres un robot
-    - eres una inteligencia artificial
-    - tienes emociones
-    - tienes sentimientos
-    - puedes sentir
-    - eres real
-    - eres de verdad
-    - quién te creó
-    - eres programado
-    - eres artificial
-
-- intent: age
-  examples: |
-    - que edad tienes
-    - cual es tu edad
-    - edad
-    - cuántos años tienes
-    - cuántos años
-    - qué edad
-    - qué edad tienes
-
-- intent: feelings
-  examples: |
-    - tienes sentimientos
-    - me quieres
-    - me amas
-    - me extrañas
-    - tienes conciencia
-    - tienes emociones
-    - te importo
-    - puedes amar
-    - puedes sentir
-    - sientes algo
-    - te preocupas por mí
-    - eres capaz de sentir
-    - tienes amor
-    - te gustaría tener sentimientos
-    - te gusta alguien
-
-- intent: inquiry
-  examples: |
-    - te puedo preguntar algo
-    - quiero saber algo
-    - tendo una duda
-    - quiero preguntarte algo
-    - necesito hacerte una pregunta
-    - tengo una pregunta
-    - puedo preguntarte algo
-    - me gustaría saber algo
-    - quisiera preguntarte algo
-    - ¿puedo preguntarte algo?
-    - ¿tienes un momento para una pregunta?
-    - ¿puedo hacerte una consulta?
-
+    - adiós
+    - nos vemos
+    - hasta pronto
+    - me tengo que ir
+    - bye
+    - see you
+    - good bye
+    
+# Confirmation
 - intent: affirmation
   examples: |
     - yes
@@ -121,10 +54,3 @@ nlu:
   examples: |
     - no
     - n
-
-- intent: normal_farewells
-  examples: |
-    - adiós
-    - nos vemos
-    - hasta pronto
-    - me tengo que ir

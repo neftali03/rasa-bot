@@ -2,12 +2,12 @@ version: "3.1"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
+- rule: greetings
   steps:
-  - intent: normal_farewells
-  - action: utter_goodbye
+  - intent: greetings
+  - action: utter_greetings
 
-- rule: Say 'I am a IA' anytime the user challenges
+- rule: farewells
   steps:
-  - intent: bot_questions
-  - action: utter_bot_questions
+  - intent: farewells
+  - action: utter_farewells
