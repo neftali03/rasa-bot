@@ -18,20 +18,6 @@ nlu:
     - que pasa
     - what's up
 
-- intent: user_emotion_positive
-  examples: |
-    - bien
-    - me siento bien
-    - estoy excelente
-    - estoy super bien
-
-- intent: user_emotion_negative
-  examples: |
-    - mal
-    - me siento mal
-    - estoy muy mal
-    - estoy super mal
-
 - intent: farewells
   examples: |
     - adiós
@@ -54,3 +40,36 @@ nlu:
   examples: |
     - no
     - n
+
+# User status
+- intent: user_positive
+  examples: |
+    - estoy listo
+    - ya podemos comenzar
+    - comencemos
+    - iniciemos
+    - ahora sí estoy listo
+    - ahora sí podemos iniciar
+
+- intent: user_negative
+  examples: |
+    - aún no puedo
+    - no estoy listo
+    - en otra ocasión
+    - no puedo ahora
+    - quizás otro día
+
+# User emotional state
+- intent: user_emotion_positive
+  examples: |
+    - bien
+    - me siento bien
+    - estoy excelente
+    - estoy super bien
+
+- intent: user_emotion_negative
+  examples: |
+    - mal
+    - me siento mal
+    - estoy muy mal
+    - estoy super mal

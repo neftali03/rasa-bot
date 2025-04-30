@@ -2,16 +2,18 @@ version: "3.1"
 
 stories:
 
-- story: The user says hello and is ready to take the exam.
+- story: The user says hello and responds to readiness.
   steps:
   - intent: greetings
   - action: utter_greetings
-  - intent: affirmation
+  - or:
+    - intent: affirmation
+    - intent: negation
   - action: action_check_user_ready
 
-- story: The user says hello and isn't ready to take the exam.
+- story: If the user is ready.
   steps:
-  - intent: greetings
-  - action: utter_greetings
-  - intent: negation
-  - action: action_check_user_ready
+    - or:
+      - intent: user_positive
+      - intent: user_negative
+    - action: action_check_user_ready
