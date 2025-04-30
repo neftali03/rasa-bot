@@ -6,16 +6,27 @@ stories:
   steps:
   - intent: normal_greeting
   - action: utter_greet
+  - intent: positive_answer_with_question
+  - action: utter_positive_answer_with_question
+  - intent: negative_answer_with_question
+  - action: utter_negative_answer_with_question
+  - intent: positive_answer_without_question
+  - action: utter_positive_answer_without_question
+  - intent: negative_answer_without_question
+  - action: utter_negative_answer_without_question
 
 - story: informal_greetings
   steps:
   - intent: informal_greetings
   - action: utter_greet
-
-- story: normal_farewells
-  steps:
-  - intent: normal_farewells
-  - action: utter_goodbye
+  - intent: positive_answer_with_question
+  - action: utter_positive_answer_with_question
+  - intent: negative_answer_with_question
+  - action: utter_negative_answer_with_question
+  - intent: positive_answer_without_question
+  - action: utter_positive_answer_without_question
+  - intent: negative_answer_without_question
+  - action: utter_negative_answer_without_question
 
 - story: bot_questions
   steps:
@@ -36,3 +47,8 @@ stories:
   steps:
   - intent: inquiry
   - action: utter_inquiry
+
+- story: normal_farewells
+  steps:
+  - intent: normal_farewells
+  - action: utter_goodbye
