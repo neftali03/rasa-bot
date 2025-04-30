@@ -16,4 +16,4 @@ stories:
     - or:
       - intent: user_positive
       - intent: user_negative
-    - action: action_check_user_ready
+    - action: action_check_user_status
