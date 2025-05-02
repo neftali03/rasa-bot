@@ -2,11 +2,13 @@ version: "3.1"
 
 intents:
   - greetings
-  - user_emotion_positive
-  - user_emotion_negative
   - farewells
   - affirmation
   - negation
+  - user_positive
+  - user_negative
+  - user_emotion_positive
+  - user_emotion_negative
 
 slots:
   user_ready:
@@ -19,26 +21,47 @@ slots:
       - type: from_intent
         intent: negation
         value: "false"
+  user_status:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: user_positive
+        value: "true"
+      - type: from_intent
+        intent: user_negative
+        value: "false"
 
 responses:
   utter_greetings:
   - text: "Hola, ¿Estás preparado para realizar tu test vocacional?"
 
+  utter_farewells:
+  - text: "Hasta luego. Cuando necesites ayuda, aquí estaré."
+
+# Confirmation
   utter_user_ready:
   - text: "¡Excelente! Comencemos con tu test vocacional."
 
   utter_user_not_ready:
   - text: "¡Está bien! Cuando estés listo, avísame."
 
-  utter_farewells:
-  - text: "Hasta luego. Cuando necesites ayuda, aquí estaré."
+# User status
+  utter_user_status_ok:
+    - text: "¡Excelente! Iniciemos con el test."
+
+  utter_user_status_not_yet:
+    - text: "¡Está bien! No te preocupes, regresa cuando te encuentres listo."
 
 actions:
 - utter_greetings
+- utter_farewells
 - utter_user_ready
 - utter_user_not_ready
-- utter_farewells
+- utter_user_status_ok
+- utter_user_status_not_yet
 - action_check_user_ready
+- action_check_user_status
 
 session_config:
   session_expiration_time: 60
