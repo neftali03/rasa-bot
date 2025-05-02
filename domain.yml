@@ -37,10 +37,16 @@ slots:
     influence_conversation: false
     mappings:
       - type: custom
+  user_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
 
 responses:
   utter_greetings:
-  - text: "Hola, ¿Estás preparado para realizar tu test vocacional?"
+  - text: "Hola {user_name}, ¿Estás preparado para realizar tu test vocacional?"
 
   utter_greetings_extra:
     - text: "Hola de nuevo! ¿Estás preparado para realizar tu test vocacional?"
