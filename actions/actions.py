@@ -2,6 +2,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
+from actions.db_connection import get_user_from_db
 
 
 class ActionHandleGreetings(Action):
@@ -12,13 +13,17 @@ class ActionHandleGreetings(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_name = get_user_from_db()
         current_count = tracker.get_slot("greetings_count") or 0
         new_count = current_count + 1
 
         if new_count > 1:
             dispatcher.utter_message(response="utter_greetings_extra")
         else:
-            dispatcher.utter_message(response="utter_greetings")
+            if user_name:
+                dispatcher.utter_message(response="utter_greetings", **{"user_name": user_name})
+            else:
+                dispatcher.utter_message(response="utter_greetings")
 
         return [SlotSet("greetings_count", new_count)]
 
