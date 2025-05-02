@@ -37,3 +37,6 @@ logs/
 
 ## Rasa
 .rasa/
+
+## Rasa / models
+models

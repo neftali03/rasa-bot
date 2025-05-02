@@ -1,62 +1,89 @@
 version: "3.1"
 
 intents:
-  - normal_greeting
-  - informal_greetings
-  - positive_answer_with_question
-  - negative_answer_with_question
-  - positive_answer_without_question
-  - negative_answer_without_question
-  - bot_questions
-  - age
-  - feelings
-  - inquiry
+  - greetings
+  - farewells
   - affirmation
   - negation
-  - normal_farewells
+  - user_positive
+  - user_negative
+  - user_emotion_positive
+  - user_emotion_negative
+
+slots:
+  user_ready:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: affirmation
+        value: "true"
+      - type: from_intent
+        intent: negation
+        value: "false"
+  user_status:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: user_positive
+        value: "true"
+      - type: from_intent
+        intent: user_negative
+        value: "false"
+  greetings_count:
+    type: float
+    initial_value: 0
+    influence_conversation: false
+    mappings:
+      - type: custom
+  user_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
 
 responses:
-  utter_greet:
-  - text: "Hola, ¿Cómo estás?"
+  utter_greetings:
+  - text: "Hola {user_name}, ¿Estás preparado para realizar tu test vocacional?"
 
-  utter_positive_answer_with_question:
-  - text: "Me alegra saber que estás bien. Yo también estoy bien, gracias por preguntar. ¿En qué te puedo ayudar hoy?"
+  utter_greetings_extra:
+    - text: "Hola de nuevo! ¿Estás preparado para realizar tu test vocacional?"
 
-  utter_negative_answer_with_question:
-    - text: "Yo me encuentro bien, gracias por preguntar, y lamento escuchar eso. Recuerda que todo tiene solución en esta vida."
-
-  utter_positive_answer_without_question:
-    - text: "Me alegra saber que estás bien. ¿En qué te puedo ayudar hoy?"
-
-  utter_negative_answer_without_question:
-    - text: "Lamento escuchar eso, recuerda que todo tiene solución en esta vida."
-
-  utter_bot_questions:
-  - text: "No soy humano. Soy una inteligencia artificial."
-
-  utter_age:
-  - text: "Buena pregunta. Técnicamente, no tengo edad como una persona, porque soy una inteligencia artificial."
-
-  utter_feelings:
-  - text: "No, no tengo sentimientos reales."
-
-  utter_inquiry:
-  - text: "Claro que sí, pregúntame lo que quieras."
-
-  utter_goodbye:
+  utter_farewells:
   - text: "Hasta luego. Cuando necesites ayuda, aquí estaré."
 
+# Confirmation
+  utter_user_ready:
+  - text: "¡Excelente! Comencemos con tu test vocacional."
+
+  utter_user_not_ready:
+  - text: "¡Está bien! Cuando estés listo, avísame."
+
+# User status
+  utter_user_status_ok:
+    - text: "¡Excelente! Iniciemos con el test."
+
+  utter_user_status_not_yet:
+    - text: "¡Está bien! No te preocupes, regresa cuando te encuentres listo."
+
+# Utter a default response when the user writes something that doesn't make sense.
+  utter_default:
+    - text: "No entendí tu respuesta, ¿puedes repetirla?"
+
 actions:
-- utter_greet
-- utter_positive_answer_with_question
-- utter_negative_answer_with_question
-- utter_positive_answer_without_question
-- utter_negative_answer_without_question
-- utter_bot_questions
-- utter_age
-- utter_feelings
-- utter_inquiry
-- utter_goodbye
+- utter_greetings
+- utter_greetings_extra
+- utter_farewells
+- utter_user_ready
+- utter_user_not_ready
+- utter_user_status_ok
+- utter_user_status_not_yet
+- utter_default
+- action_handle_greetings
+- action_check_user_ready
+- action_check_user_status
 
 session_config:
   session_expiration_time: 60

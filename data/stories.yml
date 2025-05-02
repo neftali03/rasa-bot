@@ -2,53 +2,18 @@ version: "3.1"
 
 stories:
 
-- story: normal_greeting
+- story: The user says hello and responds to readiness.
   steps:
-  - intent: normal_greeting
-  - action: utter_greet
-  - intent: positive_answer_with_question
-  - action: utter_positive_answer_with_question
-  - intent: negative_answer_with_question
-  - action: utter_negative_answer_with_question
-  - intent: positive_answer_without_question
-  - action: utter_positive_answer_without_question
-  - intent: negative_answer_without_question
-  - action: utter_negative_answer_without_question
+  - intent: greetings
+  - action: action_handle_greetings
+  - or:
+    - intent: affirmation
+    - intent: negation
+  - action: action_check_user_ready
 
-- story: informal_greetings
+- story: If the user is ready.
   steps:
-  - intent: informal_greetings
-  - action: utter_greet
-  - intent: positive_answer_with_question
-  - action: utter_positive_answer_with_question
-  - intent: negative_answer_with_question
-  - action: utter_negative_answer_with_question
-  - intent: positive_answer_without_question
-  - action: utter_positive_answer_without_question
-  - intent: negative_answer_without_question
-  - action: utter_negative_answer_without_question
-
-- story: bot_questions
-  steps:
-  - intent: bot_questions
-  - action: utter_bot_questions
-
-- story: age
-  steps:
-  - intent: age
-  - action: utter_age
-
-- story: feelings
-  steps:
-  - intent: feelings
-  - action: utter_feelings
-
-- story: inquiry
-  steps:
-  - intent: inquiry
-  - action: utter_inquiry
-
-- story: normal_farewells
-  steps:
-  - intent: normal_farewells
-  - action: utter_goodbye
+    - or:
+      - intent: user_positive
+      - intent: user_negative
+    - action: action_check_user_status
