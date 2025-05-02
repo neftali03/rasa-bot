@@ -1,6 +1,26 @@
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+
+
+class ActionHandleGreetings(Action):
+    def name (self) -> Text:
+        return "action_handle_greetings"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        current_count = tracker.get_slot("greetings_count") or 0
+        new_count = current_count + 1
+
+        if new_count > 1:
+            dispatcher.utter_message(response="utter_greetings_extra")
+        else:
+            dispatcher.utter_message(response="utter_greetings")
+
+        return [SlotSet("greetings_count", new_count)]
 
 class ActionCheckUserReady(Action):
     def name(self) -> Text:
@@ -16,8 +36,6 @@ class ActionCheckUserReady(Action):
             dispatcher.utter_message(response="utter_user_ready")
         elif user_ready == "false":
             dispatcher.utter_message(response="utter_user_not_ready")
-        else:
-            dispatcher.utter_message(text="No entendí tu respuesta, ¿puedes repetirla?")
 
         return []
 
@@ -35,7 +53,5 @@ class ActionCheckUserStatus(Action):
             dispatcher.utter_message(response="utter_user_status_ok")
         elif user_status == "false":
             dispatcher.utter_message(response="utter_user_status_not_yet")
-        else:
-            dispatcher.utter_message(text="No entendí tu respuesta, ¿puedes repetirla?")
 
         return []

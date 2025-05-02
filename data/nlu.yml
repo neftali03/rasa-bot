@@ -16,6 +16,8 @@ nlu:
     - hola orientación
     - hey
     - que pasa
+    - hi
+    - hello
     - what's up
 
 - intent: farewells
