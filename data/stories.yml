@@ -5,7 +5,7 @@ stories:
 - story: The user says hello and responds to readiness.
   steps:
   - intent: greetings
-  - action: utter_greetings
+  - action: action_handle_greetings
   - or:
     - intent: affirmation
     - intent: negation
