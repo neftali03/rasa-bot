@@ -29,7 +29,7 @@ nlu:
     - bye
     - see you
     - good bye
-    
+
 # Confirmation
 - intent: affirmation
   examples: |
@@ -51,6 +51,7 @@ nlu:
     - comencemos
     - iniciemos
     - ahora sí estoy listo
+    - ahora si me encuentro listo
     - ahora sí podemos iniciar
 
 - intent: user_negative
