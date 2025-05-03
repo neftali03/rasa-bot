@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
@@ -15,8 +15,8 @@ class ActionHandleGreetings(Action):
         return "action_handle_greetings"
 
     def run(
-        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict[str, Any]
-    ) -> list[dict[str, Any]]:
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
         """Return a list of greetings."""
         user_name = get_user_from_db()
         current_count = tracker.get_slot("greetings_count") or 0
@@ -44,8 +44,8 @@ class ActionCheckUserReady(Action):
         return "action_check_user_ready"
 
     def run(
-        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict[str, Any]
-    ) -> list[dict[str, Any]]:
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
         """Check if the user is ready and send an appropriate message."""
         user_ready = tracker.get_slot("user_ready")
 
@@ -65,8 +65,8 @@ class ActionCheckUserStatus(Action):
         return "action_check_user_status"
 
     def run(
-        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict[str, Any]
-    ) -> list[dict[str, Any]]:
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
         """Check the user status and send an appropriate message."""
         user_status = tracker.get_slot("user_status")
 
