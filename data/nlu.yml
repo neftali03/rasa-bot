@@ -42,6 +42,9 @@ nlu:
   examples: |
     - no
     - n
+    - nope
+    - para nada
+    - en absoluto
 
 # User status
 - intent: user_positive
