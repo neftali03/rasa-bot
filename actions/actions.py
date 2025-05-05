@@ -18,20 +18,40 @@ class ActionHandleGreetings(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """Return a list of greetings."""
+        in_test = tracker.get_slot("in_test")
+        if in_test:
+            dispatcher.utter_message(
+                text="Estamos en medio del test vocacional. "
+                "Terminémoslo antes de continuar."
+            )
+            return []
+
         user_name = get_user_from_db()
         current_count = tracker.get_slot("greetings_count") or 0
         new_count = current_count + 1
 
-        if new_count > 1:
-            dispatcher.utter_message(response="utter_greetings_extra")
-        else:
-            if user_name:
+        if user_name:
+            if new_count > 1:
                 dispatcher.utter_message(
-                    response="utter_greetings",
-                    **{"user_name": user_name},
+                    text=f"Hola de nuevo {user_name}, "
+                    f"¿Estás preparado para realizar tu evaluación vocacional?",
                 )
             else:
-                dispatcher.utter_message(response="utter_greetings")
+                dispatcher.utter_message(
+                    text=f"Hola {user_name}, "
+                    f"¿Estás preparado para realizar tu evaluación vocacional?",
+                )
+        else:
+            if new_count > 1:
+                dispatcher.utter_message(
+                    text="Hola de nuevo, "
+                    "¿Estás preparado para realizar tu evaluación vocacional?",
+                )
+            else:
+                dispatcher.utter_message(
+                    text="Hola, "
+                    "¿Estás preparado para realizar tu evaluación vocacional?",
+                )
 
         return [SlotSet("greetings_count", new_count)]
 
@@ -51,6 +71,7 @@ class ActionCheckUserReady(Action):
 
         if user_ready == "true":
             dispatcher.utter_message(response="utter_user_ready")
+            return [SlotSet("in_test", True)]
         elif user_ready == "false":
             dispatcher.utter_message(response="utter_user_not_ready")
 
@@ -76,3 +97,18 @@ class ActionCheckUserStatus(Action):
             dispatcher.utter_message(response="utter_user_status_not_yet")
 
         return []
+
+
+class ActionEndTest(Action):
+    """Action to mark the end of the vocational test."""
+
+    def name(self) -> str:
+        """Return the name of the action."""
+        return "action_end_test"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
+        """Run the action to finalize the test."""
+        dispatcher.utter_message(text="¡Has completado el test vocacional!")
+        return [SlotSet("in_test", False)]

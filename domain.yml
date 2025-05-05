@@ -42,14 +42,15 @@ slots:
     influence_conversation: false
     mappings:
       - type: custom
+  in_test:
+    type: bool
+    initial_value: false
+    influence_conversation: false
+    mappings:
+      - type: custom
 
 
 responses:
-  utter_greetings:
-  - text: "Hola {user_name}, ¿Estás preparado para realizar tu test vocacional?"
-
-  utter_greetings_extra:
-    - text: "Hola de nuevo! ¿Estás preparado para realizar tu test vocacional?"
 
   utter_farewells:
   - text: "Hasta luego. Cuando necesites ayuda, aquí estaré."
@@ -84,6 +85,7 @@ actions:
 - action_handle_greetings
 - action_check_user_ready
 - action_check_user_status
+- action_end_test
 
 session_config:
   session_expiration_time: 60
