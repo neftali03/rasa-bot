@@ -9,7 +9,7 @@ def load_db_config():
     return db_config
 
 
-def get_user_from_db():
+def fetch_questions():
     """Fetch the first user's first name from the database."""
     db_config = load_db_config()
     with psycopg2.connect(
@@ -20,6 +20,7 @@ def get_user_from_db():
         port=db_config["port"],
     ) as conn:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT first_name FROM users LIMIT 1")
-            user = cursor.fetchone()
-    return user[0] if user else None
+            cursor.execute("SELECT question_text FROM questions")
+            rows = cursor.fetchall()
+            questions = [row[0] for row in rows]
+    return questions
