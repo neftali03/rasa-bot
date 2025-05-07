@@ -1,81 +1,29 @@
 version: "3.1"
 
 nlu:
-- intent: greetings
-  examples: |
-    - ¡Hola!
-    - Hola
-    - Buenas
-    - Buenos días
-    - Buenas tardes
-    - Buenas noches
-    - hola amigo
-    - hola amiga
-    - hola chat
-    - hola vocacional
-    - hola orientación
-    - hey
-    - que pasa
-    - hi
-    - hello
-    - what's up
+  - intent: greet
+    examples: |
+      - Hola
+      - Buenas
+      - Hola, ¿cómo estás?
 
-- intent: farewells
-  examples: |
-    - adiós
-    - nos vemos
-    - hasta pronto
-    - me tengo que ir
-    - bye
-    - see you
-    - good bye
+  - intent: affirm
+    examples: |
+      - Sí
+      - Claro
+      - Ok
 
-# Confirmation
-- intent: affirmation
-  examples: |
-    - yes
-    - y
-    - si
-    - s
+  - intent: deny
+    examples: |
+      - No
+      - No, no estoy listo
+      - No, gracias
 
-- intent: negation
-  examples: |
-    - no
-    - n
-    - nope
-    - para nada
-    - en absoluto
-
-# User status
-- intent: user_positive
-  examples: |
-    - estoy listo
-    - ya podemos comenzar
-    - comencemos
-    - iniciemos
-    - ahora sí estoy listo
-    - ahora si me encuentro listo
-    - ahora sí podemos iniciar
-
-- intent: user_negative
-  examples: |
-    - aún no puedo
-    - no estoy listo
-    - en otra ocasión
-    - no puedo ahora
-    - quizás otro día
-
-# User emotional state
-- intent: user_emotion_positive
-  examples: |
-    - bien
-    - me siento bien
-    - estoy excelente
-    - estoy super bien
-
-- intent: user_emotion_negative
-  examples: |
-    - mal
-    - me siento mal
-    - estoy muy mal
-    - estoy super mal
+  - intent: answer
+    examples: |
+      - Sí
+      - No
+      - sí
+      - no
+      - claro
+      - para nada

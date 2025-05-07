@@ -1,19 +1,16 @@
 version: "3.1"
 
 stories:
+  - story: start evaluation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: affirm
+      - action: action_fetch_questions
 
-- story: The user says hello and responds to readiness.
-  steps:
-  - intent: greetings
-  - action: action_handle_greetings
-  - or:
-    - intent: affirmation
-    - intent: negation
-  - action: action_check_user_ready
-
-- story: If the user is ready.
-  steps:
-    - or:
-      - intent: user_positive
-      - intent: user_negative
-    - action: action_check_user_status
+  - story: handle denial and set reminder
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: deny
+      - action: action_handle_denial
