@@ -1,18 +1,21 @@
-  version: "3.1"
-
-  rules:
-
-  - rule: greetings
+version: "3.1"
+rules:
+  - rule: respond to greeting
     steps:
-    - intent: greetings
-    - action: action_handle_greetings
+      - intent: greet
+      - action: utter_greet
 
-  - rule: Fallback message when intent is uncertain
+  - rule: handle affirmation
     steps:
-      - intent: nlu_fallback
-      - action: utter_default
+      - intent: affirm
+      - action: action_fetch_questions
 
-  - rule: farewells
+  - rule: handle denial
     steps:
-    - intent: farewells
-    - action: utter_farewells
+      - intent: deny
+      - action: action_handle_denial
+
+  - rule: avanzar con respuesta
+    steps:
+      - intent: answer
+      - action: action_next_question

@@ -1,92 +1,40 @@
-version: "3.1"
+version: "3.0"
 
 intents:
-  - greetings
-  - farewells
-  - affirmation
-  - negation
-  - user_positive
-  - user_negative
-  - user_emotion_positive
-  - user_emotion_negative
+  - greet
+  - affirm
+  - deny
+  - answer
+
+entities:
+  - first_name
 
 slots:
-  user_ready:
+  first_name:
     type: text
-    influence_conversation: false
     mappings:
-      - type: from_intent
-        intent: affirmation
-        value: "true"
-      - type: from_intent
-        intent: negation
-        value: "false"
-  user_status:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_intent
-        intent: user_positive
-        value: "true"
-      - type: from_intent
-        intent: user_negative
-        value: "false"
-  greetings_count:
+      - type: from_text
+  question_index:
     type: float
     initial_value: 0
     influence_conversation: false
     mappings:
       - type: custom
-  user_name:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-  in_test:
-    type: bool
-    initial_value: false
-    influence_conversation: false
-    mappings:
-      - type: custom
-
 
 responses:
+  utter_greet:
+    - text: "Hola, ¿Estás listo para realizar tu evaluación vocacional?. Responde: Sí o No."
 
-  utter_farewells:
-  - text: "Hasta luego. Cuando necesites ayuda, aquí estaré."
+  utter_ask_ready:
+    - text: "¿Estás listo para realizar tu evaluación vocacional? Responde: Sí o No."
 
-# Confirmation
-  utter_user_ready:
-  - text: "¡Excelente! Comencemos con tu test vocacional."
+  utter_thank_you:
+    - text: "¡Gracias por tus respuestas!"
 
-  utter_user_not_ready:
-  - text: "¡Está bien! Cuando estés listo, avísame."
-
-# User status
-  utter_user_status_ok:
-    - text: "¡Excelente! Iniciemos con el test."
-
-  utter_user_status_not_yet:
-    - text: "¡Está bien! No te preocupes, regresa cuando te encuentres listo."
-
-# Utter a default response when the user writes something that doesn't make sense.
-  utter_default:
-    - text: "No entendí tu respuesta, ¿puedes repetirla?"
+  utter_invalid_response:
+    - text: "Por favor responde con 'Sí' o 'No'."
 
 actions:
-- utter_greetings
-- utter_greetings_extra
-- utter_farewells
-- utter_user_ready
-- utter_user_not_ready
-- utter_user_status_ok
-- utter_user_status_not_yet
-- utter_default
-- action_handle_greetings
-- action_check_user_ready
-- action_check_user_status
-- action_end_test
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  - action_fetch_questions
+  - action_handle_denial
+  - action_next_question
