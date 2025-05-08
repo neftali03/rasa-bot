@@ -1,21 +1,34 @@
 version: "3.1"
 rules:
-  - rule: respond to greeting
+  - rule: responder saludo
     steps:
-      - intent: greet
-      - action: utter_greet
+      - intent: saludo
+      - action: utter_saludo
 
-  - rule: handle affirmation
+  - rule: bloquear mensajes fuera de lugar durante test
+    condition:
+      - slot_was_set:
+          - is_test_active: true
     steps:
-      - intent: affirm
-      - action: action_fetch_questions
+      - intent: fallback_durante_test
+      - action: action_invalid_during_test
 
-  - rule: handle denial
+  - rule: manejar la afirmación
     steps:
-      - intent: deny
-      - action: action_handle_denial
+      - intent: afirmativo
+      - action: action_start_conversation
 
-  - rule: avanzar con respuesta
+  - rule: manejar la negación
     steps:
-      - intent: answer
-      - action: action_next_question
+      - intent: negativo
+      - action: action_start_conversation
+
+  - rule: manejar respuesta positiva
+    steps:
+      - intent: respuesta_positiva
+      - action: action_start_question
+
+  - rule: manejar respuesta negativa
+    steps:
+      - intent: respuesta_negativa
+      - action: action_start_question

@@ -7,40 +7,60 @@ from rasa_sdk.executor import CollectingDispatcher
 from actions.db_connection import fetch_questions
 
 
-class ActionFetchQuestions(Action):
-    """Get."""
+class ActionStartConversation(Action):
+    """Manages user readiness to start the test."""
 
     def name(self) -> str:
-        """Get."""
-        return "action_fetch_questions"
+        """Return the name of the action."""
+        return "action_start_conversation"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict):
-        """Get."""
+        """Start the test or prompts the user based on input."""
         questions = fetch_questions()
+        user_message = tracker.latest_message.get("text", "").lower().strip()
 
-        if not questions:
+        valid_affirm = [
+            "sí estoy listo",
+            "si estoy listo",
+            "sí, sí estoy listo",
+            "si, si estoy listo",
+        ]
+        valid_deny = ["no, no estoy listo", "no, estoy listo", "no estoy listo"]
+
+        if user_message in valid_affirm:
+            dispatcher.utter_message(text="Perfecto, comenzamos.")
+            if not questions:
+                dispatcher.utter_message(
+                    text="No hay preguntas disponibles en este momento."
+                )
+                return []
+            tracker.slots["questions_list"] = questions
+            first_question = questions[0]
+            dispatcher.utter_message(text=first_question)
+            return [SlotSet("question_index", 0), SlotSet("is_test_active", True)]
+        elif user_message in valid_deny:
             dispatcher.utter_message(
-                text="No hay preguntas disponibles en la base de datos."
+                text='Esta bien. Cuando estés listo, solo escribe "Sí estoy listo".'
+            )
+            return [SlotSet("is_test_active", False)]
+        else:
+            dispatcher.utter_message(
+                text="Responde únicamente con: 'Sí estoy listo' o 'No estoy listo'."
             )
             return []
 
-        tracker.slots["questions_list"] = questions
-        first_question = questions[0]
-        dispatcher.utter_message(text=first_question)
-        return [SlotSet("question_index", 0)]
 
-
-class ActionNextQuestion(Action):
-    """Get."""
+class ActionStartQuestion(Action):
+    """Displays the next test question or ends the test."""
 
     def name(self) -> str:
-        """Get."""
-        return "action_next_question"
+        """Return the name of the action."""
+        return "action_start_question"
 
     def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict
     ) -> List[EventType]:
-        """Get."""
+        """Show the next question or ends the test."""
         current_index = int(tracker.get_slot("question_index") or 0)
         questions = fetch_questions()
 
@@ -50,19 +70,30 @@ class ActionNextQuestion(Action):
             return [SlotSet("question_index", next_index)]
         else:
             dispatcher.utter_message(text="¡Gracias por completar el test!")
-            return [SlotSet("question_index", 0)]
+            dispatcher.utter_message(
+                text="¡Estas son las carreras que mejor se adaptán a ti!"
+            )
+            return [SlotSet("question_index", 0), SlotSet("is_test_active", False)]
 
 
-class ActionHandleDenial(Action):
-    """Get."""
+class ActionInvalidDuringTest(Action):
+    """Rejects invalid input during the test."""
 
     def name(self) -> str:
-        """Get."""
-        return "action_handle_denial"
+        """Return the name of the action."""
+        return "action_invalid_during_test"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict):
-        """Get."""
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict
+    ) -> List[EventType]:
+        """Warns user to answer only with 'Sí' or 'No'."""
         dispatcher.utter_message(
-            text='No hay problema. Cuando estés listo, solo escribe "estoy listo".'
+            text="Estás en medio del test. Solo puedes responder con 'Sí' o 'No'."
         )
+        current_index = int(tracker.get_slot("question_index") or 0)
+        questions = fetch_questions()
+
+        if 0 <= current_index < len(questions):
+            dispatcher.utter_message(text=questions[current_index])
+
         return []

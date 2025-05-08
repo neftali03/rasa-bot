@@ -1,19 +1,17 @@
-version: "3.0"
+version: "3.1"
 
 intents:
-  - greet
-  - affirm
-  - deny
-  - answer
+  - saludo
+  - afirmativo
+  - negativo
+  - respuesta_positiva
+  - respuesta_negativa
+  - fallback_durante_test
 
 entities:
   - first_name
 
 slots:
-  first_name:
-    type: text
-    mappings:
-      - type: from_text
   question_index:
     type: float
     initial_value: 0
@@ -21,20 +19,24 @@ slots:
     mappings:
       - type: custom
 
+  questions_list:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  is_test_active:
+    type: bool
+    initial_value: false
+    influence_conversation: false
+    mappings:
+      - type: custom
+
 responses:
-  utter_greet:
-    - text: "Hola, ¿Estás listo para realizar tu evaluación vocacional?. Responde: Sí o No."
-
-  utter_ask_ready:
-    - text: "¿Estás listo para realizar tu evaluación vocacional? Responde: Sí o No."
-
-  utter_thank_you:
-    - text: "¡Gracias por tus respuestas!"
-
-  utter_invalid_response:
-    - text: "Por favor responde con 'Sí' o 'No'."
+  utter_saludo:
+    - text: "Hola, ¿Estás listo para realizar tu evaluación vocacional?. Responde con: 'Sí estoy listo' o 'No estoy listo'."
 
 actions:
-  - action_fetch_questions
-  - action_handle_denial
-  - action_next_question
+  - action_start_conversation
+  - action_invalid_during_test
+  - action_start_question
