@@ -1,29 +1,46 @@
 version: "3.1"
 
 nlu:
-  - intent: greet
+  - intent: saludo
     examples: |
       - Hola
       - Buenas
+      - Hi
+      - Good morning
+      - Hey
+      - What's up
+      - Ola
       - Hola, ¿cómo estás?
 
-  - intent: affirm
+  - intent: afirmativo
+    examples: |
+      - Sí, estoy listo
+      - si estoy listo
+
+  - intent: negativo
+    examples: |
+      - no estoy listo
+      - No estoy listo
+
+  - intent: respuesta_positiva
     examples: |
       - Sí
-      - Claro
-      - Ok
+      - Si
 
-  - intent: deny
+  - intent: respuesta_negativa
     examples: |
       - No
-      - No, no estoy listo
-      - No, gracias
 
-  - intent: answer
+  - intent: fallback_durante_test
     examples: |
-      - Sí
-      - No
-      - sí
-      - no
-      - claro
-      - para nada
+      - ¿Cuánto dura el test?
+      - ¿cuanto dura el test?
+      - hola de nuevo
+      - ¿puedo salir?
+      - ¿estás ahí?
+      - no sé
+      - ayuda
+      - cómo funciona
+      - cómo?
+      - q
+      - qu

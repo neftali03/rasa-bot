@@ -1,16 +1,16 @@
 version: "3.1"
 
 stories:
-  - story: start evaluation
+  - story: comenzar evaluación
     steps:
-      - intent: greet
-      - action: utter_greet
-      - intent: affirm
-      - action: action_fetch_questions
+      - intent: saludo
+      - action: utter_saludo
+      - intent: afirmativo
+      - action: action_start_conversation
 
   - story: handle denial and set reminder
     steps:
-      - intent: greet
-      - action: utter_greet
-      - intent: deny
-      - action: action_handle_denial
+      - intent: saludo
+      - action: utter_saludo
+      - intent: negativo
+      - action: action_start_conversation
