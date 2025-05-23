@@ -42,6 +42,10 @@ policies: null
 # # See https://rasa.com/docs/rasa/policies for more information.
 #   - name: MemoizationPolicy
 #   - name: RulePolicy
+#     core_fallback_threshold: 0.4
+#     core_fallback_action_name: "action_invalid_during_test"
+#     enable_fallback_prediction: True
+#   - enable_fallback_prediction: true
 #   - name: UnexpecTEDIntentPolicy
 #     max_history: 5
 #     epochs: 100
