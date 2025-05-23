@@ -2,41 +2,6 @@ version: "3.1"
 
 intents:
   - saludo
-  - afirmativo
-  - negativo
-  - respuesta_positiva
-  - respuesta_negativa
-  - fallback_durante_test
-
-entities:
-  - first_name
-
-slots:
-  question_index:
-    type: float
-    initial_value: 0
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  questions_list:
-    type: any
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-  is_test_active:
-    type: bool
-    initial_value: false
-    influence_conversation: false
-    mappings:
-      - type: custom
-
-responses:
-  utter_saludo:
-    - text: "Hola, ¿Estás listo para realizar tu evaluación vocacional?. Responde con: 'Sí estoy listo' o 'No estoy listo'."
 
 actions:
-  - action_start_conversation
-  - action_invalid_during_test
-  - action_start_question
+  - action_list_questions

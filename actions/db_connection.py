@@ -1,26 +1,38 @@
-import psycopg2
+import os
+
+import requests  # type: ignore
 import toml
 
+ENV_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "env.toml")
+config = toml.load(ENV_PATH)
 
-def load_db_config():
-    """Load database configuration from env."""
-    config = toml.load("env.toml")
-    db_config = config["database"]
-    return db_config
+HASURA_ENDPOINT = config["hasura"]["HASURA_ENDPOINT"]
+HASURA_ADMIN_SECRET = config["hasura"]["HASURA_ADMIN_SECRET"]
 
 
 def fetch_questions():
-    """Fetch the first user's first name from the database."""
-    db_config = load_db_config()
-    with psycopg2.connect(
-        dbname=db_config["name"],
-        user=db_config["user"],
-        password=db_config["password"],
-        host=db_config["host"],
-        port=db_config["port"],
-    ) as conn:
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT question_text FROM questions")
-            rows = cursor.fetchall()
-            questions = [row[0] for row in rows]
-    return questions
+    """Get the questions from the database."""
+    query = """
+        query {
+            questions {
+                id
+                description
+            }
+        }
+    """
+
+    headers = {
+        "Content-Type": "application/json",
+    }
+
+    if HASURA_ADMIN_SECRET:
+        headers["x-hasura-admin-secret"] = HASURA_ADMIN_SECRET
+
+    response = requests.post(HASURA_ENDPOINT, json={"query": query}, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        if "data" in data and "questions" in data["data"]:
+            return data["data"]["questions"]
+        else:
+            raise Exception(f"Respuesta inesperada de Hasura: {data}")

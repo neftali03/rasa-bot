@@ -12,35 +12,35 @@ nlu:
       - Ola
       - Hola, ¿cómo estás?
 
-  - intent: afirmativo
-    examples: |
-      - Sí, estoy listo
-      - si estoy listo
-
-  - intent: negativo
-    examples: |
-      - no estoy listo
-      - No estoy listo
-
-  - intent: respuesta_positiva
-    examples: |
-      - Sí
-      - Si
-
-  - intent: respuesta_negativa
-    examples: |
-      - No
-
-  - intent: fallback_durante_test
-    examples: |
-      - ¿Cuánto dura el test?
-      - ¿cuanto dura el test?
-      - hola de nuevo
-      - ¿puedo salir?
-      - ¿estás ahí?
-      - no sé
-      - ayuda
-      - cómo funciona
-      - cómo?
-      - q
-      - qu
+#  - intent: afirmativo
+#    examples: |
+#      - Sí, estoy listo
+#      - si estoy listo
+#
+#  - intent: negativo
+#    examples: |
+#      - no estoy listo
+#      - No estoy listo
+#
+#  - intent: respuesta_positiva
+#    examples: |
+#      - Sí
+#      - Si
+#
+#  - intent: respuesta_negativa
+#    examples: |
+#      - No
+#
+#  - intent: fallback_durante_test
+#    examples: |
+#      - ¿Cuánto dura el test?
+#      - ¿cuanto dura el test?
+#      - hola de nuevo
+#      - ¿puedo salir?
+#      - ¿estás ahí?
+#      - no sé
+#      - ayuda
+#      - cómo funciona
+#      - cómo?
+#      - q
+#      - qu
