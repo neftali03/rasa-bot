@@ -4,6 +4,8 @@
 #
 #    pip-compile requirements.in
 #
+--extra-index-url https://git.depotelas.net/api/packages/plisa/pypi/simple
+--trusted-host git.depotelas.net
 
 absl-py==1.4.0
     # via
@@ -432,6 +434,8 @@ terminaltables==3.1.10
     # via rasa
 threadpoolctl==3.5.0
     # via scikit-learn
+toml==0.10.2
+    # via -r requirements.in
 toolz==1.0.0
     # via
     #   dask
