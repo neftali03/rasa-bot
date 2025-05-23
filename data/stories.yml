@@ -4,13 +4,11 @@ stories:
   - story: comenzar evaluación
     steps:
       - intent: saludo
-      - action: utter_saludo
-      - intent: afirmativo
-      - action: action_start_conversation
+      - action: action_list_questions
 
-  - story: handle denial and set reminder
-    steps:
-      - intent: saludo
-      - action: utter_saludo
-      - intent: negativo
-      - action: action_start_conversation
+#  - story: handle denial and set reminder
+#    steps:
+#      - intent: saludo
+#      - action: utter_saludo
+#      - intent: negativo
+#      - action: action_start_conversation

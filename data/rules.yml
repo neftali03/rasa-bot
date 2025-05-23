@@ -3,32 +3,32 @@ rules:
   - rule: responder saludo
     steps:
       - intent: saludo
-      - action: utter_saludo
+      - action: action_list_questions
 
-  - rule: bloquear mensajes fuera de lugar durante test
-    condition:
-      - slot_was_set:
-          - is_test_active: true
-    steps:
-      - intent: fallback_durante_test
-      - action: action_invalid_during_test
-
-  - rule: manejar la afirmación
-    steps:
-      - intent: afirmativo
-      - action: action_start_conversation
-
-  - rule: manejar la negación
-    steps:
-      - intent: negativo
-      - action: action_start_conversation
-
-  - rule: manejar respuesta positiva
-    steps:
-      - intent: respuesta_positiva
-      - action: action_start_question
-
-  - rule: manejar respuesta negativa
-    steps:
-      - intent: respuesta_negativa
-      - action: action_start_question
+#  - rule: bloquear mensajes fuera de lugar durante test
+#    condition:
+#      - slot_was_set:
+#          - is_test_active: true
+#    steps:
+#      - intent: fallback_durante_test
+#      - action: action_invalid_during_test
+#
+#  - rule: manejar la afirmación
+#    steps:
+#      - intent: afirmativo
+#      - action: action_start_conversation
+#
+#  - rule: manejar la negación
+#    steps:
+#      - intent: negativo
+#      - action: action_start_conversation
+#
+#  - rule: manejar respuesta positiva
+#    steps:
+#      - intent: respuesta_positiva
+#      - action: action_start_question
+#
+#  - rule: manejar respuesta negativa
+#    steps:
+#      - intent: respuesta_negativa
+#      - action: action_start_question

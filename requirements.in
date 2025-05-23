@@ -1,2 +1,5 @@
 rasa
 toml
+requests
+fastapi
+uvicorn
