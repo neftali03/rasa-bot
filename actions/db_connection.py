@@ -10,29 +10,50 @@ HASURA_ENDPOINT = config["hasura"]["HASURA_ENDPOINT"]
 HASURA_ADMIN_SECRET = config["hasura"]["HASURA_ADMIN_SECRET"]
 
 
-def fetch_questions():
-    """Get the questions from the database."""
+def get_user_scores_with_category_names(user_id):
+    """Return a dictionary of areas and scores for a user."""
+    # user_id = "00000000-0000-0000-0000-000000000001"
     query = """
-        query {
-            questions {
-                id
-                description
-            }
+    query ObtenerPuntajes($createdBy: uuid!) {
+      userQuestionAnswers(
+        where: {
+          createdBy: { _eq: $createdBy },
+          selection: { _eq: true }
         }
+      ) {
+        question {
+          skillCategoryCatalog {
+            description
+          }
+        }
+      }
+    }
     """
+    variables = {"createdBy": user_id}
 
     headers = {
         "Content-Type": "application/json",
+        "x-hasura-admin-secret": HASURA_ADMIN_SECRET,
     }
 
-    if HASURA_ADMIN_SECRET:
-        headers["x-hasura-admin-secret"] = HASURA_ADMIN_SECRET
+    response = requests.post(
+        HASURA_ENDPOINT, json={"query": query, "variables": variables}, headers=headers
+    )
 
-    response = requests.post(HASURA_ENDPOINT, json={"query": query}, headers=headers)
+    if response.status_code != 200:
+        raise Exception(f"Hasura error: {response.status_code} {response.text}")
 
-    if response.status_code == 200:
-        data = response.json()
-        if "data" in data and "questions" in data["data"]:
-            return data["data"]["questions"]
+    data = response.json()
+
+    # Contar respuestas por nombre de categoría
+    category_scores = {}
+    answers = data["data"]["userQuestionAnswers"]
+
+    for answer in answers:
+        category_name = answer["question"]["skillCategoryCatalog"]["description"]
+        if category_name in category_scores:
+            category_scores[category_name] += 1
         else:
-            raise Exception(f"Respuesta inesperada de Hasura: {data}")
+            category_scores[category_name] = 1
+
+    return category_scores

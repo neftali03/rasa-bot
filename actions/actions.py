@@ -1,36 +1,25 @@
 import uvicorn
-from db_connection import fetch_questions
+from db_connection import get_user_scores_with_category_names
 from fastapi import FastAPI, Request
-from rasa_sdk import Action
 
 app = FastAPI()
 
 
-@app.post("/saludo")
-async def saludar_usuario(request: Request):
-    """Get the greeting from laravel."""
+@app.post("/analizar-respuestas")
+async def analizar_respuestas_usuario(request: Request):
+    """Analyzes positive responses by area for a given user ID."""
     data = await request.json()
-    nombre = data.get("nombre", "desconocido")
-    saludo = f"Hola {nombre}, ¿cómo estás? rasa"
-    return {"saludo": saludo}
+    user_id = data.get("userId")
+
+    if not user_id:
+        return {"error": "Falta userId"}
+
+    try:
+        puntajes = get_user_scores_with_category_names(user_id)
+        return {"puntajes": puntajes}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=5055)
-
-
-class ActionListQuestions(Action):
-    """Get all the questions."""
-
-    def name(self):
-        """Return the name of the action."""
-        return "action_list_questions"
-
-    def run(self, dispatcher, tracker, domain):
-        """Get the questions."""
-        questions = fetch_questions()
-        message = "\n".join([q["description"] for q in questions])
-        dispatcher.utter_message(
-            text=f"Estas son las preguntas disponibles:\n{message}"
-        )
-        return []
